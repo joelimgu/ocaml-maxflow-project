@@ -26,9 +26,12 @@ let () =
   let graph = from_file infile in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph in
 
   let graph2 = gmap graph (int_of_string) in
-  let graph3 = add_arc graph2 1 2 43 in 
+  let graph3 = add_arc graph2 1 2 22 in 
   
+  (* TODO remap string to int *)
+  let () = write_file outfile (gmap graph3 string_of_int) in
+
+
   ()
