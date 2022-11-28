@@ -32,7 +32,10 @@ let () =
   let graph3 = add_arc graph2 1 2 22 in 
   
   (* TODO remap string to int *)
-  let () = write_file outfile (gmap graph3 string_of_int) in
+  (*let () = write_file outfile (gmap graph3 string_of_int) in*)
 
+  let () = export graph "test" in
+
+ 
 
   ()
