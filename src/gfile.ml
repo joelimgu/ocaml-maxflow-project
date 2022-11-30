@@ -99,3 +99,18 @@ let from_file path =
   close_in infile ;
   final_graph
 
+let export gr path = 
+  let ff = open_out path in
+
+  (* Write in this file. *)
+  fprintf ff "digraph finite_state_machine {\n";
+  fprintf ff "fontname=\"Helvetica,Arial,sans-serif\"\n";
+  fprintf ff "node [fontname=\"Helvetica,Arial,sans-serif\"]\n";
+  fprintf ff "edge [fontname=\"Helvetica,Arial,sans-serif\"]\n";
+  fprintf ff "rankdir=LR;\nnode [shape = circle];\n";
+
+  e_iter gr (fun id1 id2 lbl -> fprintf ff "%d -> %d [label=\"%s\"]\n" id1 id2 lbl) ;
+
+  fprintf ff "\n\n }"
+
+  

@@ -39,4 +39,9 @@ let () =
   | Some(p) -> List.map (fun n -> Printf.printf "->%s" (string_of_int n)) p; ()
   in
 (*   let o: int out_arcs = [] in*)
+  let () = export graph "test" in
+
+
+
   ()
+

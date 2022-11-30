@@ -32,6 +32,7 @@ let dfs graph node_src node_dest =
 (*(*parcours en porfondeur*)*)
 (*    ()*)
 
+    ()
 
-(*let fulkerson graph start dest = assert false;;*)
 
+let fulkerson graph start dest = assert false;;
