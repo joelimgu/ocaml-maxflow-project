@@ -29,10 +29,14 @@ let () =
   (* Rewrite the graph that has been read. *)
 
   let graph2 = gmap graph (int_of_string) in
-  let graph3 = add_arc graph2 1 2 22 in 
-  
+  let graph3 = add_arc graph2 1 2 22 in
+
   (* TODO remap string to int *)
   let () = write_file outfile (gmap graph3 string_of_int) in
 
-
+  let () = match (dfs graph 0 5) with
+  | None -> Printf.printf "Unknown line:\n%s\n%!" "None (path not found)"
+  | Some(p) -> List.map (fun n -> Printf.printf "->%s" (string_of_int n)) p; ()
+  in
+(*   let o: int out_arcs = [] in*)
   ()
