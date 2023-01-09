@@ -2,7 +2,7 @@ open Gfile
 open Tools
 open Graph
 
-let dfs graph node_src node_dest =
+let dfs graph node_src node_dest filter =
     let new_viewed_nodes = empty_graph in
     let rec in_dfs viewed_nodes n =
         if n=node_dest then Some([n]) else
@@ -20,6 +20,7 @@ let dfs graph node_src node_dest =
 
 
 let fulkerson graph start dest =
+    (* create a graph with a capacity *)
     let (cap_graph: (int*int) graph) = gmap graph (function | (poids,_) -> (0,poids)) in
     (* find arcs in a path *)
     let rec get_arcs g path acc = match path with
@@ -39,7 +40,14 @@ let fulkerson graph start dest =
     let min_arc (min_acc: int) (label:(int*int)) = if (get_diff label) < min_acc then get_diff label else min_acc
     in
     let rec in_fulkerson (n:int) (acc: (int*int) graph) =
-        (*TODO filter graph before DFS *)
+        (* TODO: filter graph before DFS *)
+        let graph_arc_list = e_fold acc (fun acc_fold id1 id2 label -> (id1,id2,label)::acc_fold) []
+        in
+        let filtered_arcs = List.filter (function | (_,_,label) -> (get_diff label)>0) graph_arc_list
+        in
+        let acc = List.fold_left (fun fold_acc el -> )
+
+
         let path = match (dfs acc start dest) with
            | None -> []
            | Some(path) -> path
