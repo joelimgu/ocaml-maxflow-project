@@ -33,12 +33,15 @@ let () =
 
   let graphintint = gmap graph2 (function | value -> (0,value)) in
 
-  (* TODO remap string to int *)
   let () = write_file outfile (gmap graph3 string_of_int) in
 
-  let () = match (dfs graphintint 0 5) with
+  let get_diff (label: ('a*'a)) = match label with
+  | (cap, poids) -> poids - cap
+  in
+  let diff_equals_zero = (function | (_,label) -> get_diff label != 0) in
+  let () = match (dfs diff_equals_zero graphintint 0 5) with
   | None -> Printf.printf "Unknown line:\n%s\n%!" "None (path not found)"
-  | Some(p) -> List.map (fun n -> Printf.printf "path->%s" (string_of_int n)) p; ()
+  | Some(p) -> List.iter (fun n -> Printf.printf "path->%s" (string_of_int n)) p; Printf.printf "%s" "\n"; ()
   in
 
   let return_test_fulkerson = fulkerson graph2 0 5 in

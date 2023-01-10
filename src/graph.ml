@@ -46,6 +46,3 @@ let n_fold gr f acu = List.fold_left (fun acu (id, _) -> f acu id) acu gr
 let e_iter gr f = List.iter (fun (id1, out) -> List.iter (fun (id2, x) -> f id1 id2 x) out) gr
 
 let e_fold gr f acu = List.fold_left (fun acu (id1, out) -> List.fold_left (fun acu (id2, x) -> f acu id1 id2 x) acu out) acu gr
-
-(* TODO filter function, not touching ID *)
-let e_filter f graph = List.filter (f (function | (id, out_arcs) -> out_arcs)

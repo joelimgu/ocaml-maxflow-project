@@ -2,9 +2,8 @@ open Gfile
 open Tools
 open Graph
 
-val dfs: (int*int) graph -> id -> id -> id list option
+(* DFS algorithm, returns a list of nodes for where the path goes though *)
+val dfs: (Graph.id *('b*'b) -> bool) -> ('b*'b) graph -> id -> id -> id list option
 
+(* returns the max capacity that is able to go thought the graph using the ford-fulkerson algorithm *)
 val fulkerson: int graph -> id -> id -> int
-(*val find_path: 'a graph -> 'a -> 'a -> 'a graph*)
-
-(*val fulkerson: int graph -> id -> id -> int * int graph*)
