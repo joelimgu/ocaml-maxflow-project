@@ -1,0 +1,10 @@
+L'usine 1 peut fabriquer 32 pièces
+L'usine 2 peut fabriquer 22 pièces
+L'usine 3 peut fabriquer 11 pièces
+Le village 11 à besoin de 14 pièces
+Le village 12 à besoin de 11 pièces
+Il existe une route entre l'usine 1 et le village 11 d'une capacité de 8
+Il existe une route entre l'usine 2 et le village 12 d'une capacité de 12
+Il existe une route entre l'usine 1 et le village 12 d'une capacité de 12
+Il existe une route entre l'usine 2 et le village 12 d'une capacité de 2
+Il existe une route entre l'usine 3 et le village 11 d'une capacité de 5

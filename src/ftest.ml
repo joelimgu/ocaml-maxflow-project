@@ -2,6 +2,7 @@ open Gfile
 open Tools
 open Graph
 open Fulkerson
+open Parsedeliver
 
 let () =
 
@@ -24,11 +25,11 @@ let () =
   in
 
   (* Open file *)
-  let graph = from_file infile in
+  let graph = from_file_deliver infile in
 
   (* Rewrite the graph that has been read. *)
 
-  let graph2 = gmap graph (int_of_string) in
+  (*let graph2 = gmap graph (int_of_string) in
   let graph3 = add_arc graph2 1 2 22 in
 
   let graphintint = gmap graph2 (function | value -> (0,value)) in
@@ -47,10 +48,14 @@ let () =
   let return_test_fulkerson = fulkerson graph2 0 5 in
   let () = Printf.printf "DFS test: %i" return_test_fulkerson in
 
-(*  let () = Printf.printf "%i" return_test_dfs in*)
+(*  let () = Printf.printf "%i" return_test_dfs in*)*)
 
 (*   let o: int out_arcs = [] in*)
-  let () = export graph "test" in
+
+  let return_test_fulkerson = fulkerson graph 0 99 in
+  let () = Printf.printf "DFS test: %i" return_test_fulkerson in
+  let () = write_file outfile (gmap graph string_of_int) in
+  let () = export (gmap graph (string_of_int)) "test" in
 
   ()
 
