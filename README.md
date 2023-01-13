@@ -1,21 +1,17 @@
-Base project for Ocaml project on Ford-Fulkerson. This project contains some simple configuration files to facilitate editing Ocaml in VSCode.
+# Project
 
-To use, you should install the *OCaml* extension in VSCode. Other extensions might work as well but make sure there is only one installed.
-Then open VSCode in the root directory of this repository (command line: `code path/to/ocaml-maxflow-project`).
+This project realized by Joel Imbergamo Guasch and Killian Gonet implements the Ford-Fulkerson algorithm in OCaml and apply it in a basic application of delivery system between factories and cities. 
 
-Features :
- - full compilation as VSCode build task (Ctrl+Shift+b)
- - highlights of compilation errors as you type
- - code completion
- - automatic indentation on file save
+# Installation
 
+- Install the module "ocamlfind" : ```opam install ocamlfind```
+- Install the module "Text" : ```opam install text```
 
-A makefile provides some useful commands:
- - `make build` to compile. This creates an ftest.native executable
- - `make demo` to run the `ftest` program with some arguments
- - `make format` to indent the entire project
- - `make edit` to open the project in VSCode
- - `make clean` to remove build artifacts
+# Using
 
-In case of trouble with the VSCode extension (e.g. the project does not build, there are strange mistakes), a common workaround is to (1) close vscode, (2) `make clean`, (3) `make build` and (4) reopen vscode (`make edit`).
+- To launch the test, launch ```make demo``` in a terminal. By default, the file graphs/graph2 is used in the test, but you can make your own by using the `delivery_template.example` (in French, sorry :)).
+- If you want to change the path of the executed file, you need to go to the Makefile and modify the first argument of ./ftestnative to your path. 
 
+# Warnings
+
+- The name of a city or of a factory **cannot** be 0 or 99 (reserved to calculate the max flow of the graph).

@@ -25,7 +25,7 @@ let () =
   in
 
   (* Open file *)
-  let graph = from_file_deliver infile in
+  (*let graph = from_file_deliver infile in*)
 
   (* Rewrite the graph that has been read. *)
 
@@ -52,10 +52,12 @@ let () =
 
 (*   let o: int out_arcs = [] in*)
 
-  let return_test_fulkerson = fulkerson graph 0 99 in
+  (*let return_test_fulkerson = fulkerson graph 0 99 in
   let () = Printf.printf "DFS test: %i" return_test_fulkerson in
   let () = write_file outfile (gmap graph string_of_int) in
   let () = export (gmap graph (string_of_int)) "test" in
+*)
 
+let valReturnDeliver = fulkerson_deliver infile in
+Printf.printf "Le flot maximum de pièces dans cette configuration est de %d\n" valReturnDeliver ;
   ()
-

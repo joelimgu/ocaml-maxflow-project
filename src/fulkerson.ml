@@ -1,6 +1,7 @@
 open Gfile
 open Tools
 open Graph
+open Parsedeliver
 
 (* get the diff between poids and cap of an arc *)
 let get_diff (label: ('a*'a)) = match label with
@@ -65,8 +66,8 @@ let fulkerson graph start dest =
         match (dfs diff_equals_zero acc start dest) with
            | None -> []
            | Some(path) -> path in
-
-        List.iter (function | p -> Printf.printf "%d->\n" p) path ;
+        (*TO UNCOMMENT TO TRACE*)
+        (*List.iter (function | p -> Printf.printf "%d->\n" p) path ;*)
 
         (* if the path is empty the algorithm has finished so we return the max flow (n) *)
         match path with
@@ -78,8 +79,9 @@ let fulkerson graph start dest =
             (* value to add to every arc *)
             let (min: 'int) =
                 List.fold_left (min_arc) (get_diff (List.hd arcs_in_path)) arcs_in_path in
-                Printf.printf "Min : %d\n" min;
-                List.iter (function | (c,p) -> Printf.printf "%d\n" p) arcs_in_path ;
+                (*TO UNCOMMENT TO TRACE*)
+                (*Printf.printf "Min : %d\n" min;*)
+                (*List.iter (function | (c,p) -> Printf.printf "%d\n" p) arcs_in_path ;*)
             (* create new arcs to reflect the new used capacity *)
             let new_arcs =
                 List.map (function | (cap, poids) -> (cap+min,poids)) arcs_in_path in
@@ -90,4 +92,16 @@ let fulkerson graph start dest =
     in
     (* call the inner function with the accumulators *)
     in_fulkerson 0 cap_graph
+;;
+
+let fulkerson_deliver path = 
+      (* Open file *)
+  let graph = from_file_deliver path in
+  let return_test_fulkerson = fulkerson graph 0 99 in
+  
+  (*let () = Printf.printf "DFS test: %i\n" return_test_fulkerson in*)
+  let () = write_file "./fichier_return" (gmap graph string_of_int) in
+  let () = export (gmap graph (string_of_int)) "test" in
+
+  return_test_fulkerson
 ;;
