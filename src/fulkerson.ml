@@ -44,14 +44,14 @@ let fulkerson graph start dest =
     let (cap_graph: (int*int) graph) =
         gmap graph (function | poids -> (0,poids)) in
     (* find arcs in a path *)
-    let rec get_arcs g path acc =
+    let rec get_arcs g path =
         match path with
-        | a::b::rest -> (function | Some(x) ->  x::acc | None -> acc) (find_arc g a b)
-        | _ -> acc in
+        | a::b::rest -> (function | Some(x) ->  x::(get_arcs g (b::rest)) | None -> []) (find_arc g a b)
+        | _ -> [] in
     (* replace arcs in the path with the new arcs in the list *)
     let rec map_path (g: ('a*'a) graph) (path: id list) (new_arc_list: ('a*'a) list) =
         match (path,new_arc_list) with
-        | (a::b::rest_path,l::rest_arc) -> new_arc (map_path g rest_path rest_arc) a b l
+        | (a::b::rest_path,l::rest_arc) -> new_arc (map_path g (b::rest_path) rest_arc) a b l
         | _ -> g in
     (* get min between a number and the arc diff *)
     let min_arc (min_acc: int) (label:(int*int)) =
@@ -65,16 +65,21 @@ let fulkerson graph start dest =
         match (dfs diff_equals_zero acc start dest) with
            | None -> []
            | Some(path) -> path in
+
+        List.iter (function | p -> Printf.printf "%d->\n" p) path ;
+
         (* if the path is empty the algorithm has finished so we return the max flow (n) *)
         match path with
         | [] -> n
         | path ->
             (* find the arcs associated with the path *)
             let (arcs_in_path: (int*int) list) =
-                get_arcs acc path [] in
+                get_arcs acc path in
             (* value to add to every arc *)
             let (min: 'int) =
                 List.fold_left (min_arc) (get_diff (List.hd arcs_in_path)) arcs_in_path in
+                Printf.printf "Min : %d\n" min;
+                List.iter (function | (c,p) -> Printf.printf "%d\n" p) arcs_in_path ;
             (* create new arcs to reflect the new used capacity *)
             let new_arcs =
                 List.map (function | (cap, poids) -> (cap+min,poids)) arcs_in_path in
