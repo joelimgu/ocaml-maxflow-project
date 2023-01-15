@@ -24,40 +24,17 @@ let () =
   and _sink = int_of_string Sys.argv.(3)
   in
 
-  (* Open file *)
-  (*let graph = from_file_deliver infile in*)
 
-  (* Rewrite the graph that has been read. *)
+(* TEST WITH DELIVERY SYSTEM *)
+(*let valReturnDeliver = fulkerson_deliver infile in
+Printf.printf "Le flot maximum de pièces dans cette configuration est de %d\n" valReturnDeliver ;*)
+(* ------------- *)
 
-  (*let graph2 = gmap graph (int_of_string) in
-  let graph3 = add_arc graph2 1 2 22 in
+(* TEST WITH DEFAULT GRAPH *)
+let graph = from_file infile in
+let graph2 = gmap graph (int_of_string) in
+let return_test_fulkerson = fulkerson graph2 0 5 in
+Printf.printf "Le flot maximum est de %d\n" return_test_fulkerson ;
+(* ----------------------- *)
 
-  let graphintint = gmap graph2 (function | value -> (0,value)) in
-
-  let () = write_file outfile (gmap graph3 string_of_int) in
-
-  let get_diff (label: ('a*'a)) = match label with
-  | (cap, poids) -> poids - cap
-  in
-  let diff_equals_zero = (function | (_,label) -> get_diff label != 0) in
-  let () = match (dfs diff_equals_zero graphintint 0 5) with
-  | None -> Printf.printf "Unknown line:\n%s\n%!" "None (path not found)"
-  | Some(p) -> List.iter (fun n -> Printf.printf "path->%s" (string_of_int n)) p; Printf.printf "%s" "\n"; ()
-  in
-
-  let return_test_fulkerson = fulkerson graph2 0 5 in
-  let () = Printf.printf "DFS test: %i" return_test_fulkerson in
-
-(*  let () = Printf.printf "%i" return_test_dfs in*)*)
-
-(*   let o: int out_arcs = [] in*)
-
-  (*let return_test_fulkerson = fulkerson graph 0 99 in
-  let () = Printf.printf "DFS test: %i" return_test_fulkerson in
-  let () = write_file outfile (gmap graph string_of_int) in
-  let () = export (gmap graph (string_of_int)) "test" in
-*)
-
-let valReturnDeliver = fulkerson_deliver infile in
-Printf.printf "Le flot maximum de pièces dans cette configuration est de %d\n" valReturnDeliver ;
   ()
