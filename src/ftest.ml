@@ -27,13 +27,14 @@ let () =
 
 (* TEST WITH DELIVERY SYSTEM *)
 (*let valReturnDeliver = fulkerson_deliver infile in
-Printf.printf "Le flot maximum de pièces dans cette configuration est de %d\n" valReturnDeliver ;*)
+Printf.printf "Le flot maximum de pièces dans cette configuration est de %d\n" valReturnDeliver ; *)
 (* ------------- *)
 
 (* TEST WITH DEFAULT GRAPH *)
 let graph = from_file infile in
 let graph2 = gmap graph (int_of_string) in
-let return_test_fulkerson = fulkerson graph2 0 5 in
+let return_test_fulkerson = fulkerson graph2 _source _sink in
+
 Printf.printf "Le flot maximum est de %d\n" return_test_fulkerson ;
 (* ----------------------- *)
 

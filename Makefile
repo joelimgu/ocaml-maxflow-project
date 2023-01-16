@@ -9,10 +9,15 @@ format:
 edit:
 	code . -n
 
-demo: build
+demo1: build
 	@echo "\n==== EXECUTING ====\n"
-	# ./ftest.native graphs/graph2 1 2 outfile
-	./ftest.native graphs/graph1 1 2 outfile
+	./ftest.native graphs/graph1 0 5 outfile
+	@echo "\n==== RESULT ==== (content of outfile) \n"
+	@cat outfile
+
+demo2: build
+	@echo "\n==== EXECUTING ====\n"
+	./ftest.native graphs/graph2 1 2 outfile
 	@echo "\n==== RESULT ==== (content of outfile) \n"
 	@cat outfile
 
